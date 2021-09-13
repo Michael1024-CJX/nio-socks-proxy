@@ -1,8 +1,5 @@
 package sun.nio.ch;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.net.Inet6Address;
 import java.net.InetSocketAddress;
@@ -13,7 +10,6 @@ import java.nio.channels.spi.SelectorProvider;
 import static sun.nio.ch.SocksConsts.*;
 
 public class SocksProxySocketChannel extends SocketChannelImpl {
-    private Logger logger = LoggerFactory.getLogger(SocksProxySocketChannel.class);
 
     private static final int DEFAULT_ENCODER_BUFFER_SIZE = 1024;
 
@@ -48,7 +44,8 @@ public class SocksProxySocketChannel extends SocketChannelImpl {
             try {
                 connect = socksConnect(socksProxy);
             } catch (Exception e) {
-                logger.error("未能连接代理服务器：" + externalAddress, e);
+                System.out.println("未能连接代理服务器：" + externalAddress);
+                e.printStackTrace();
                 connect = super.connect(externalAddress);
             }
         } else {
@@ -76,9 +73,9 @@ public class SocksProxySocketChannel extends SocketChannelImpl {
             }
 
             if (connect) {
-                logger.info("连接socks服务器成功");
+                System.out.println("连接socks服务器成功");
             }else {
-                logger.warn("连接socks服务器失败");
+                System.out.println("连接socks服务器失败");
             }
         }
         ByteBuffer byteBuffer = ByteBuffer.allocate(DEFAULT_ENCODER_BUFFER_SIZE);
