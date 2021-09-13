@@ -20,6 +20,9 @@ public class SocksAgent {
                         "org.socks.provider.SocksProxySelectorProvider");
             }
         }
+    }
 
+    public static void agentmain(String agentArgs, Instrumentation inst) throws IOException {
+        premain(agentArgs, inst);
     }
 }

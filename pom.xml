@@ -45,6 +45,7 @@
                     <archive>
                         <manifestEntries>
                             <Premain-Class>org.socks.SocksAgent</Premain-Class>
+                            <Agent-Class>org.socks.SocksAgent</Agent-Class>
                             <Can-Redefine-Classes>true</Can-Redefine-Classes>
                             <Can-Retransform-Classes>true</Can-Retransform-Classes>
                         </manifestEntries>
