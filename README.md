@@ -5,12 +5,12 @@
 
 ## 使用方式
 
-配置项目启动参数，javaagent与nioSocksProxyJar的参数值为lib/nio-socks-proxy-1.0.0.jar的绝对路径。socksProxyHost与socksProxyPort配置socks服务器的地址。
+配置项目启动参数，javaagent与nioSocksProxyJar的参数值为lib/nio-socks-proxy-1.0.0.jar的绝对路径。nioSocksProxyHost与nioSocksProxyPort配置socks服务器的地址。
 
 ```
--DsocksProxyHost=127.0.0.1
--DsocksProxyPort=2223
--javaagent:xxx\nio-socks-proxy-1.0.0.jar
--DnioSocksProxyJar=xxx\nio-socks-proxy-1.0.0.jar
+-DnioSocksProxyHost=127.0.0.1
+-DnioSocksProxyPort=2223
+-javaagent:xxx\nio-socks-proxy.jar
+-DnioSocksProxyJar=xxx\nio-socks-proxy.jar
 ```
 

@@ -24,7 +24,7 @@ public class SocksProxySocketChannel extends SocketChannelImpl {
 
     @Override
     public SocketAddress remoteAddress() {
-        if (externalAddress != null) {
+        if (externalAddress != null && isSatisfy()) {
             return externalAddress;
         } else {
             return super.remoteAddress();
@@ -56,7 +56,8 @@ public class SocksProxySocketChannel extends SocketChannelImpl {
 
     protected boolean isSatisfy() {
         // 排除本地调试时的情况
-        return !externalAddress.getHostString().equals("127.0.0.1");
+        String hostString = externalAddress.getHostString();
+        return !hostString.equals("127.0.0.1");
     }
 
     private boolean socksConnect(InetSocketAddress socksProxy) throws IOException {
@@ -130,9 +131,22 @@ public class SocksProxySocketChannel extends SocketChannelImpl {
 
     private void initSocks() {
         proxyServer = System.getProperty("socksProxyHost");
-        final String socksProxyPort = System.getProperty("socksProxyPort");
-        if (socksProxyPort != null) {
-            proxyServerPort = Integer.parseInt(socksProxyPort);
+        if (proxyServer != null) {
+            final String socksProxyPort = System.getProperty("socksProxyPort");
+            if (socksProxyPort != null) {
+                proxyServerPort = Integer.parseInt(socksProxyPort);
+            }
+
+        }else {
+            proxyServer = System.getProperty("nioSocksProxyHost");
+            final String socksProxyPort = System.getProperty("nioSocksProxyPort");
+            if (socksProxyPort != null) {
+                proxyServerPort = Integer.parseInt(socksProxyPort);
+            }
+        }
+
+        if (proxyServer == null) {
+            throw new IllegalArgumentException("未设置NIO socks 代理");
         }
     }
 
